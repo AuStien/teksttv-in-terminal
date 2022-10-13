@@ -1,0 +1,33 @@
+#!/bin/bash
+
+re="^([0-9]{3}|-)$"
+
+function getPage() {
+  read -p "Page: " page
+  while ! [[ "${page}" =~ ${re} ]]; do
+    tput cuu 1
+    echo -e "\033[2K"
+    tput cuu 1
+    read -p "Page: " page
+  done
+  if [ $page = '-' ]
+  then
+    page=$prevPage
+  fi
+  prevPage=$page
+}
+
+printf "\033c"
+
+page=100
+
+#url="curl 'https://www.nrk.no/teletextresources/${page}.1-w500.gif' -s --output - | viu -s -"
+url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
+
+while true; do
+  kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif
+  getPage
+  printf "\033c"
+done
+
+
