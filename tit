@@ -2,6 +2,13 @@
 
 re="^([0-9]{3}|-)$"
 
+trap ctrl_c INT
+
+function ctrl_c() {
+  printf "\033c"
+  exit 0
+}
+
 function getPage() {
   local currentPage=$page
   read -p "($currentPage)Page: " page
