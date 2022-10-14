@@ -1,6 +1,6 @@
 #!/bin/bash
 
-re="^([0-9]{3}|-)$"
+re="^([0-9]{3}|-|\^\[\[A])$"
 
 function getPage() {
   read -p "Page: " page
@@ -12,6 +12,10 @@ function getPage() {
   done
   if [ $page = '-' ]; then
     page=$prevPage
+  fi
+  if [ $page = '^[[A' ]
+  then
+   page=$page+1
   fi
   prevPage=$page
 }
@@ -28,5 +32,3 @@ while true; do
   getPage
   printf "\033c"
 done
-
-
