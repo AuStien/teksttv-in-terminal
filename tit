@@ -10,8 +10,7 @@ function getPage() {
     tput cuu 1
     read -p "Page: " page
   done
-  if [ $page = '-' ]
-  then
+  if [ $page = '-' ]; then
     page=$prevPage
   fi
   prevPage=$page
@@ -22,7 +21,7 @@ printf "\033c"
 page=100
 
 #url="curl 'https://www.nrk.no/teletextresources/${page}.1-w500.gif' -s --output - | viu -s -"
-url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
+#url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
 
 while true; do
   kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif
