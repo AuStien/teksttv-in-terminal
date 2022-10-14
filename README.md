@@ -1,6 +1,9 @@
 # TiT - TekstTV in Terminal
 
-For the resolution to be acceptable, the [Kitty](https://sw.kovidgoyal.net/kitty/) or [iTerm](https://iterm2.com/index.html) terminal is required (due to the graphic protocol used by [Viu](https://github.com/atanunq/viu)).
+Displays images of norwegian TextTV retrived from NRK. Since these are images, a terminal with with graphical support is required. Currently the only terminal supported is [Kitty](https://sw.kovidgoyal.net/kitty). [Image Magick](https://imagemagick.org/index.php) is also required.
 
+## TODO:
 
-`curl https://www.nrk.no/teletextresources/100.1-w500.gif --output - | viu - -w 75 -s`
+- Add support for iTerm2
+- Add arrow key navigation
+
