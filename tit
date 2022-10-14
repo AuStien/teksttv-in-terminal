@@ -55,7 +55,7 @@ side=1
 #url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
 
 while true; do
-  kitty +kitten icat --place 100x150@10x5 --scale-up https://www.nrk.no/teletextresources/${page}.${side}-w500.gif
+  kitty +kitten icat --place 100x150@10x5 --scale-up -l 0 https://www.nrk.no/teletextresources/${page}.${side}-w500.gif
   getPage
   printf "\033c"
 done
