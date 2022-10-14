@@ -32,7 +32,10 @@ page=100
 #url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
 
 while true; do
-  kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif
+  size=`kitty +kitten icat --print-window-size`
+  echo $size
+  kitty +kitten icat --place=$size@0x0 --scale-up https://www.nrk.no/teletextresources/${page}.1-w500.gif
+  #kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif
   getPage
   printf "\033c"
 done
