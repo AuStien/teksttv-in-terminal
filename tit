@@ -4,12 +4,12 @@ re="^([0-9]{3}|-)$"
 
 function getPage() {
   local currentPage=$page
-  read -p "Page: " page
+  read -p "($currentPage)Page: " page
   while ! [[ "${page}" =~ ${re} ]]; do
     tput cuu 1
     echo -e "\033[2K"
     tput cuu 1
-    read -p "Page: " page
+    read -p "($currentPage)Page: " page
   done
   if [ $page = '-' ]; then
     page=$prevPage
