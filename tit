@@ -1,22 +1,42 @@
 #!/bin/bash
 
-re="^([0-9]{3}|-|\^\[\[A])$"
+re="^([0-9]{3}|-|w|a|s|d)$"
+num="^([0-9]{2})$"
 
 function getPage() {
   local currentPage=$page
-  read -p "($currentPage)Page: " page
-  while ! [[ "${page}" =~ ${re} ]]; do
-    tput cuu 1
+  read -rn1 -p "($currentPage)Page: " page
+  if ! [[ "${page}" =~ ${re} ]]; then
+    read -rn2 rest
+    if [[ "${rest}" =~ ${num} ]]; then
+      let "hundred=page*100"
+      let "page=hundred+rest"
+    fi
+  fi
+  if ! [[ "${page}" =~ ${re} ]]; then
     echo -e "\033[2K"
     tput cuu 1
-    read -p "($currentPage)Page: " page
-  done
+    let "page=currentPage"
+    getPage
+    fi
   if [ $page = '-' ]; then
     page=$prevPage
   fi
-  if [ $page = '^[[A' ]
+  if [ $page = 'w' ];
   then
-   page=$page+1
+   let "page=currentPage+1"
+  fi
+  if [ $page = 'a' ];
+  then
+   let "page=currentPage-1"
+  fi
+  if [ $page = 's' ];
+  then
+   let "page=currentPage-1"
+  fi
+  if [ $page = 'd' ];
+  then
+   let "page=currentPage+1"
   fi
   prevPage=$currentPage
 }
