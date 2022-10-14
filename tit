@@ -3,12 +3,13 @@
 re="^([0-9]{3}|-|\^\[\[A])$"
 
 function getPage() {
-  read -p "Page: " page
+  local currentPage=$page
+  read -p "($currentPage)Page: " page
   while ! [[ "${page}" =~ ${re} ]]; do
     tput cuu 1
     echo -e "\033[2K"
     tput cuu 1
-    read -p "Page: " page
+    read -p "($currentPage)Page: " page
   done
   if [ $page = '-' ]; then
     page=$prevPage
@@ -17,7 +18,7 @@ function getPage() {
   then
    page=$page+1
   fi
-  prevPage=$page
+  prevPage=$currentPage
 }
 
 printf "\033c"
