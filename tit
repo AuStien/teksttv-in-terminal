@@ -11,6 +11,7 @@ function getPage() {
     if [[ "${rest}" =~ ${num} ]]; then
       let "hundred=page*100"
       let "page=hundred+rest"
+      side=1
     fi
   fi
   if ! [[ "${page}" =~ ${re} ]]; then
@@ -21,22 +22,27 @@ function getPage() {
     fi
   if [ $page = '-' ]; then
     page=$prevPage
+    side=1
   fi
   if [ $page = 'w' ];
   then
-   let "page=currentPage+1"
+   let "page=currentPage"
+   side=1
   fi
   if [ $page = 'a' ];
   then
    let "page=currentPage-1"
+   side=1
   fi
   if [ $page = 's' ];
   then
-   let "page=currentPage-1"
+   let "page=currentPage"
+   side=2
   fi
   if [ $page = 'd' ];
   then
    let "page=currentPage+1"
+   side=1
   fi
   prevPage=$currentPage
 }
@@ -44,12 +50,12 @@ function getPage() {
 printf "\033c"
 
 page=100
-
+side=1
 #url="curl 'https://www.nrk.no/teletextresources/${page}.1-w500.gif' -s --output - | viu -s -"
 #url="kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif"
 
 while true; do
-  kitty +kitten icat https://www.nrk.no/teletextresources/${page}.1-w500.gif
+  kitty +kitten icat https://www.nrk.no/teletextresources/${page}.${side}-w500.gif
   getPage
   printf "\033c"
 done
